@@ -46,11 +46,11 @@ def read(extracted):
         return file.read()
 
 if __name__ == "__main__":
-    scraped = scrape(URL)
-    extracted = extract(scraped)
-    print(extracted)
-    content = read(extracted)
-    if extracted != "No upcoming tours":
-        if extracted not in content:
-            store(extracted)
-            send_email(message="Hey, new event was found!")
+        scraped = scrape(URL)
+        extracted = extract(scraped)
+        print(extracted)
+        content = read(extracted)
+        if extracted != "No upcoming tours":
+            if extracted not in content:
+                store(extracted)
+                send_email(message="Hey, new event was found!")
