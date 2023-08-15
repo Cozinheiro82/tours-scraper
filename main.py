@@ -1,7 +1,13 @@
 import requests
 import selectorlib
 import st
-import smtplib, ssl
+import smtplib
+import ssl
+import os
+import time
+
+"INSERT INTO events VALUES ('Tigers', 'Tiger City', '2088.10.14')"
+"SELECT * FROM events WHERE date='2088.10.15'"
 
 
 URL = "http://programmer100.pythonanywhere.com/tours/"
@@ -41,11 +47,14 @@ def store(extracted):
     with open("data.txt", "a") as file:
         file.write(extracted + "\n")
 
+
 def read(extracted):
     with open("data.txt", "r") as file:
         return file.read()
 
+
 if __name__ == "__main__":
+    while True:
         scraped = scrape(URL)
         extracted = extract(scraped)
         print(extracted)
@@ -54,3 +63,4 @@ if __name__ == "__main__":
             if extracted not in content:
                 store(extracted)
                 send_email(message="Hey, new event was found!")
+        time.sleep(20)
